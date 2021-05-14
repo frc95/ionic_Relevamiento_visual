@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-item color="primary" (click)="Logout()" class="itemHeader" slot="start">
+      <ion-icon color="danger" name="log-out-sharp"></ion-icon>
+    </ion-item>
+    <ion-title slot="start">Cosas lindas del edificio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngFor="let photo of photos">
+    <ion-card>
+      <ion-img [src]='photo.webviewPath'></ion-img>
+      <ion-card-header>
+        <ion-card-title>{{photo.name}} {{photo.time | date: 'short'}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-badge color="danger">{{photo.likes}}</ion-badge>
+          <ion-icon (click)="Like(photo)" *ngIf='!photo.liked' color="danger" name="heart-outline" style="padding-left: 10px;"></ion-icon>
+          <ion-icon (click)="Like(photo)" *ngIf='photo.liked' color="danger" name="heart-sharp" style="padding-left: 10px;"></ion-icon>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="newPhoto()">
+      <ion-icon name="camera-sharp"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
